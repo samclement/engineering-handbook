@@ -21,7 +21,7 @@ const allRoles = [
 ];
 
 export function DimensionExplainer() {
-    const [viewMode, setViewMode] = useState<ViewMode>('dimension');
+    const [viewMode, setViewMode] = useState<ViewMode>('role');
     const [selectedDimension, setSelectedDimension] = useState<DimensionType>('scope');
     const [selectedRole, setSelectedRole] = useState<string>('software-engineer-se');
 
@@ -45,8 +45,8 @@ export function DimensionExplainer() {
                     <button
                         onClick={() => setViewMode('dimension')}
                         className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm transition-all ${viewMode === 'dimension'
-                                ? 'bg-background shadow-sm'
-                                : 'text-muted-foreground hover:text-foreground'
+                            ? 'bg-background shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
                             }`}
                     >
                         <LayoutGrid className="w-4 h-4" />
@@ -55,8 +55,8 @@ export function DimensionExplainer() {
                     <button
                         onClick={() => setViewMode('role')}
                         className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm transition-all ${viewMode === 'role'
-                                ? 'bg-background shadow-sm'
-                                : 'text-muted-foreground hover:text-foreground'
+                            ? 'bg-background shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
                             }`}
                     >
                         <User className="w-4 h-4" />
@@ -75,8 +75,8 @@ export function DimensionExplainer() {
                                 key={dimension.id}
                                 onClick={() => setSelectedDimension(dimension.id)}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedDimension === dimension.id
-                                        ? 'bg-primary text-primary-foreground shadow-md'
-                                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                                    ? 'bg-primary text-primary-foreground shadow-md'
+                                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                                     }`}
                             >
                                 {dimension.name}
@@ -158,20 +158,22 @@ export function DimensionExplainer() {
             {/* Role View */}
             {viewMode === 'role' && (
                 <>
-                    {/* Role Selector */}
-                    <div className="max-w-md mx-auto">
-                        <label className="block text-sm font-semibold mb-2 text-center">Select Your Role</label>
-                        <select
-                            value={selectedRole}
-                            onChange={(e) => setSelectedRole(e.target.value)}
-                            className="w-full p-3 rounded-lg border border-border bg-background font-medium"
-                        >
+                    {/* Role Tabs */}
+                    <div className="mb-6">
+                        <div className="flex gap-2 flex-wrap justify-center">
                             {allRoles.map((role) => (
-                                <option key={role.slug} value={role.slug}>
+                                <button
+                                    key={role.slug}
+                                    onClick={() => setSelectedRole(role.slug)}
+                                    className={`px-4 py-2.5 rounded-lg font-medium text-sm transition-all whitespace-nowrap ${selectedRole === role.slug
+                                        ? 'bg-primary text-primary-foreground shadow-md'
+                                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                                        }`}
+                                >
                                     {role.title}
-                                </option>
+                                </button>
                             ))}
-                        </select>
+                        </div>
                     </div>
 
                     {/* Role Dimensions Display */}
@@ -235,7 +237,8 @@ export function DimensionExplainer() {
                         </motion.div>
                     )}
                 </>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }

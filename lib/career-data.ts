@@ -20,8 +20,8 @@ function slugify(text: string): string {
 }
 
 export async function getCareerFrameworkData(): Promise<Role[]> {
-    // Adjust path to point to the parent directory where career_framework.md is located
-    const filePath = path.join(process.cwd(), '../career_framework.md');
+    // path to the career framework markdown file in the project root
+    const filePath = path.join(process.cwd(), 'career_framework.md');
 
     try {
         const fileContent = fs.readFileSync(filePath, 'utf8');

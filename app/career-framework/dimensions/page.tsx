@@ -1,13 +1,55 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, GitCompare, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCareerFrameworkData } from "@/lib/career-data";
 import { DimensionExplainer } from "@/components/DimensionExplainer";
 import { RoleComparator } from "@/components/RoleComparator";
 import { WorkExamplesExplorer } from "@/components/WorkExamplesExplorer";
 
-export default async function DimensionsPage() {
-    const roles = await getCareerFrameworkData();
+type TabType = "dimensions" | "compare" | "examples";
+
+interface Role {
+    title: string;
+    slug: string;
+    track: 'IC' | 'Management';
+    content: string;
+    summary: string;
+}
+
+export default function DimensionsPage() {
+    const [activeTab, setActiveTab] = useState<TabType>("dimensions");
+    const [roles, setRoles] = useState<Role[]>([]);
+
+    useEffect(() => {
+        // Fetch role data from API route
+        fetch('/api/career-framework')
+            .then(res => res.json())
+            .then(setRoles)
+            .catch(err => console.error('Failed to fetch roles:', err));
+    }, []);
+
+    const tabs = [
+        {
+            id: "dimensions" as TabType,
+            label: "Understanding Dimensions",
+            icon: BarChart3,
+            description: "Learn about the 5 key dimensions that differentiate roles",
+        },
+        {
+            id: "compare" as TabType,
+            label: "Compare Roles",
+            icon: GitCompare,
+            description: "Side-by-side comparison of roles across dimensions",
+        },
+        {
+            id: "examples" as TabType,
+            label: "Work Examples",
+            icon: BookOpen,
+            description: "Concrete scenarios showing what good looks like",
+        },
+    ];
 
     return (
         <div className="container py-12 max-w-screen-xl mx-auto px-4">
@@ -30,49 +72,37 @@ export default async function DimensionsPage() {
                 </div>
             </div>
 
-            {/* Navigation Cards */}
+            {/* Tab Navigation */}
             <div className="grid md:grid-cols-3 gap-4 mb-12">
-                <a href="#dimensions" className="group p-6 rounded-xl border border-border bg-card hover:border-primary hover:shadow-md transition-all">
-                    <BarChart3 className="w-8 h-8 text-primary mb-3" />
-                    <h3 className="font-bold mb-2 group-hover:text-primary transition-colors">Understanding Dimensions</h3>
-                    <p className="text-sm text-muted-foreground">Learn about the 5 key dimensions that differentiate roles</p>
-                </a>
+                {tabs.map((tab) => {
+                    const Icon = tab.icon;
+                    const isActive = activeTab === tab.id;
 
-                <a href="#compare" className="group p-6 rounded-xl border border-border bg-card hover:border-primary hover:shadow-md transition-all">
-                    <GitCompare className="w-8 h-8 text-primary mb-3" />
-                    <h3 className="font-bold mb-2 group-hover:text-primary transition-colors">Compare Roles</h3>
-                    <p className="text-sm text-muted-foreground">Side-by-side comparison of roles across dimensions</p>
-                </a>
-
-                <a href="#examples" className="group p-6 rounded-xl border border-border bg-card hover:border-primary hover:shadow-md transition-all">
-                    <BookOpen className="w-8 h-8 text-primary mb-3" />
-                    <h3 className="font-bold mb-2 group-hover:text-primary transition-colors">Work Examples</h3>
-                    <p className="text-sm text-muted-foreground">Concrete scenarios showing what good looks like</p>
-                </a>
+                    return (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`group p-6 rounded-xl border-2 transition-all text-left ${isActive
+                                ? "border-primary bg-primary/5 shadow-md"
+                                : "border-border bg-card hover:border-primary hover:shadow-md"
+                                }`}
+                        >
+                            <Icon className={`w-8 h-8 mb-3 ${isActive ? "text-primary" : "text-primary"}`} />
+                            <h3 className={`font-bold mb-2 transition-colors ${isActive ? "text-primary" : "group-hover:text-primary"
+                                }`}>
+                                {tab.label}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">{tab.description}</p>
+                        </button>
+                    );
+                })}
             </div>
 
-            {/* Sections */}
-            <div className="space-y-16">
-                {/* Dimension Explainer Section */}
-                <section id="dimensions" className="scroll-mt-8">
-                    <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8">
-                        <DimensionExplainer />
-                    </div>
-                </section>
-
-                {/* Role Comparator Section */}
-                <section id="compare" className="scroll-mt-8">
-                    <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8">
-                        <RoleComparator roles={roles} />
-                    </div>
-                </section>
-
-                {/* Work Examples Section */}
-                <section id="examples" className="scroll-mt-8">
-                    <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8">
-                        <WorkExamplesExplorer />
-                    </div>
-                </section>
+            {/* Tab Content */}
+            <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 lg:p-8">
+                {activeTab === "dimensions" && <DimensionExplainer />}
+                {activeTab === "compare" && <RoleComparator roles={roles} />}
+                {activeTab === "examples" && <WorkExamplesExplorer />}
             </div>
 
             {/* Footer Note */}
