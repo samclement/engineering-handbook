@@ -201,9 +201,6 @@ export function CareerPathVisualizer() {
                 <div className="absolute top-[2%] left-1/2 -translate-x-1/2 text-purple-500/30 font-bold text-4xl tracking-widest uppercase pointer-events-none select-none">
                     Leadership
                 </div>
-                <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 text-blue-500/30 font-bold text-4xl tracking-widest uppercase pointer-events-none select-none">
-                    SDLC
-                </div>
 
                 {/* Leadership Focus Label */}
                 <div className="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block text-center w-40 pointer-events-none">
@@ -213,6 +210,7 @@ export function CareerPathVisualizer() {
 
                 {/* SDLC Focus Label */}
                 <div className="absolute top-[60%] right-[20%] hidden lg:block text-left max-w-[150px] pointer-events-none">
+                    <div className="text-blue-500/30 font-bold text-3xl tracking-widest uppercase">Individual Contributor</div>
                     <h4 className="text-sm font-bold text-slate-600">SDLC Focus</h4>
                     <p className="text-xs text-muted-foreground">Execution, Craft, Delivery</p>
                 </div>
