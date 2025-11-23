@@ -68,8 +68,8 @@ export default function NavigatorPage() {
                                 </li>
                             </ul>
                             <Button asChild variant="outline" className="w-full">
-                                <Link href="/career-framework/competencies">
-                                    View Competencies
+                                <Link href="/career-framework/roles">
+                                    View Roles
                                 </Link>
                             </Button>
                         </CardContent>

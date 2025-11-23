@@ -22,7 +22,7 @@ const roles: RoleNode[] = [
         title: "Graduate Software Engineer",
         slug: "graduate-software-engineer-gse",
         level: "Junior",
-        track: "Shared",
+        track: "IC",
         description: "Focus: Learn SDLC, quality, and team ways of working.",
     },
     {
@@ -30,7 +30,7 @@ const roles: RoleNode[] = [
         title: "Associate Software Engineer",
         slug: "associate-software-engineer-ase",
         level: "Mid",
-        track: "Shared",
+        track: "IC",
         description: "Focus: Deliver small stories end-to-end under guidance.",
     },
     {
@@ -38,7 +38,7 @@ const roles: RoleNode[] = [
         title: "Software Engineer",
         slug: "software-engineer-se",
         level: "Mid",
-        track: "Shared",
+        track: "IC",
         description: "Focus: Reliable delivery of features with solid engineering practice.",
     },
     {
@@ -46,7 +46,7 @@ const roles: RoleNode[] = [
         title: "Senior Software Engineer",
         slug: "senior-software-engineer-sse",
         level: "Senior",
-        track: "Shared",
+        track: "IC",
         description: "Focus: Technical depth plus velocity; raising the team's engineering bar.",
     },
     // IC Track
@@ -141,62 +141,7 @@ export function CareerPathVisualizer() {
         <div className="relative pt-24 pb-4 px-4 bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
             {/* Background Zones (Venn Diagram) */}
             <div className="absolute inset-0 pointer-events-none">
-                <svg className="w-full h-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="leadershipGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="rgb(168 85 247)" stopOpacity="0.15" />
-                            <stop offset="100%" stopColor="rgb(168 85 247)" stopOpacity="0.08" />
-                        </linearGradient>
-                        <linearGradient id="sdlcGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="rgb(59 130 246)" stopOpacity="0.08" />
-                            <stop offset="100%" stopColor="rgb(59 130 246)" stopOpacity="0.15" />
-                        </linearGradient>
-                        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="rgb(203 213 225)" />
-                            <stop offset="100%" stopColor="rgb(203 213 225)" />
-                        </linearGradient>
-                    </defs>
 
-                    {/* Leadership Zone (Top) - Covers Rows 1-3 */}
-                    <rect
-                        x="0"
-                        y="0"
-                        width="100"
-                        height="52"
-                        rx="40"
-                        fill="url(#leadershipGrad)"
-                    />
-
-                    {/* SDLC Zone (Bottom) - Covers Rows 3-7 */}
-                    <rect
-                        x="0"
-                        y="33"
-                        width="100"
-                        height="67"
-                        rx="40"
-                        fill="url(#sdlcGrad)"
-                    />
-
-                    {/* Connecting Lines */}
-                    {/* Principal (Col 1, Row 2) -> Staff (Col 2, Row 3) */}
-                    <path d="M 28 20 C 28 25, 33.33 23, 33.33 32" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                    {/* SHoSE (Col 5, Row 1) -> HoSE (Col 5, Row 2) */}
-                    <path d="M 72 10 L 72 20" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                    {/* HoSE (Col 5, Row 2) -> EM (Col 4, Row 3) */}
-                    <path d="M 72 20 C 72 25, 66.66 23, 66.66 32" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                    {/* Staff (Col 2, Row 3) -> SSE (Col 3, Row 4) */}
-                    <path d="M 33.33 32 C 33.33 40, 50 38, 50 45" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                    {/* EM (Col 4, Row 3) -> SSE (Col 3, Row 4) */}
-                    <path d="M 66.66 32 C 66.66 40, 50 38, 50 45" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                    {/* SDLC Vertical Line */}
-                    <path d="M 50 45 L 50 100" fill="none" stroke="rgb(203 213 225)" strokeWidth="2" strokeDasharray="4 4" />
-
-                </svg>
                 {/* Zone Labels */}
                 <div className="absolute top-[2%] left-1/2 -translate-x-1/2 text-purple-500/30 font-bold text-4xl tracking-widest uppercase pointer-events-none select-none">
                     Leadership
