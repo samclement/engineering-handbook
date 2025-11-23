@@ -57,6 +57,7 @@ Each role below lists scope, expected competence, and the crossover into leaders
   - **Execution:** Orchestrates multi‑team initiatives; de‑risks with spikes/iterations.
   - **Reliability/Security:** Bakes in SLOs, resilience, and secure defaults.
   - **Org Influence:** Shapes roadmaps with PMs; aligns stakeholders.
+  - **Finance:** Understands platform costs; optimizes resource usage.
 - **Leadership Crossover:** Coaches seniors; leads design reviews; sets bar for quality and operational excellence.
 
 ### Principal Software Engineer
@@ -67,6 +68,7 @@ Each role below lists scope, expected competence, and the crossover into leaders
   - **Platforms:** Designs shared systems and contracts; reduces org‑wide complexity.
   - **Change Leadership:** Drives cross‑org migrations and standards adoption.
   - **External:** Represents engineering in cross‑functional/exec forums.
+  - **Finance:** Helps plan technical investments; evaluates build vs. buy decisions.
 - **Leadership Crossover:** Mentors Staff/Senior; builds leadership bench; aligns leaders on principles and outcomes.
 
 ## Management Track
@@ -79,6 +81,7 @@ Each role below lists scope, expected competence, and the crossover into leaders
   - **Delivery:** Backlog health, predictability, cross‑functional collaboration.
   - **Operations:** On‑call/process ownership; escalations; risk management.
   - **Technical:** Staff‑level technical literacy; reviews for direction/quality.
+  - **Finance:** Understands platform costs, team costs, and capabilities.
 - **Leadership Crossover:** Facilitates team‑level leadership; aligns with partners; cultivates culture and standards.
 
 ### Head of Software Engineering (HoSE)
@@ -89,6 +92,7 @@ Each role below lists scope, expected competence, and the crossover into leaders
   - **Strategy/Planning:** Roadmap shaping, investment trade‑offs, metrics.
   - **Execution:** Leads cross‑team programs; resolves systemic blockers.
   - **Technical:** Principal‑level judgement; governs architecture via leaders.
+  - **Finance:** Plans costs across product group; allocates budget.
 - **Leadership Crossover:** Dovetails into org leadership—sets culture, principles, and operating model with peers.
 
 ### Senior Head of Software Engineering (SHoSE)
@@ -99,6 +103,7 @@ Each role below lists scope, expected competence, and the crossover into leaders
   - **Org Health:** Leadership pipeline, performance systems, operating cadence.
   - **Cross‑Company:** Aligns with product, design, data, security, finance.
   - **Technical Governance:** Distinguished‑level guidance through councils/principles.
+  - **Finance:** Plans costs across the portfolio; sets overall budget.
 - **Leadership Crossover:** Executive‑level leadership; steers culture and outcomes at scale.
 
 ## SDLC vs Leadership Emphasis
