@@ -2,10 +2,32 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, FileText, Download, MousePointerClick } from "lucide-react";
+import {
+    ArrowLeft, FileText, Download, MousePointerClick,
+    Layout, Code, TestTube, Shield, Activity, Eye, Box, LifeBuoy,
+    ChevronRight, GraduationCap, User, Users, Briefcase, Award
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { sdlcData, roles, SDLCLevel } from "@/lib/sdlc-data";
 import { SDLCDetailModal } from "@/components/SDLCDetailModal";
+
+// Map domains to icons and colors
+const domainConfig: Record<string, { icon: React.ElementType, color: string }> = {
+    "System/component design": { icon: Layout, color: "text-blue-500" },
+    "Eng practices": { icon: Code, color: "text-green-500" },
+    "Testing & QA": { icon: TestTube, color: "text-purple-500" },
+    "Build & Deploy": { icon: Box, color: "text-orange-500" },
+    "Support & Operations": { icon: LifeBuoy, color: "text-red-500" },
+};
+
+// Map roles to icons
+const roleIcons: Record<string, React.ElementType> = {
+    "Graduate": GraduationCap,
+    "Associate": User,
+    "Senior Engineer": Code,
+    "Staff": Briefcase,
+    "Engineering Manager": Users,
+};
 
 export default function SDLCPage() {
     const [selectedCell, setSelectedCell] = useState<{
@@ -50,107 +72,157 @@ export default function SDLCPage() {
                 </div>
             </div>
 
-            <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-2 rounded-lg w-fit">
+            <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-2 rounded-lg w-fit border border-border/50">
                 <MousePointerClick className="w-4 h-4" />
                 <span>Click on any cell to view detailed behaviors and examples</span>
             </div>
 
             <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm">
                 <table className="w-full text-sm text-left border-collapse min-w-[1200px]">
-                    <thead className="bg-muted text-muted-foreground">
+                    <thead className="bg-muted/30 text-muted-foreground">
                         <tr>
-                            <th className="p-4 font-bold border-b-2 border-r border-border w-[200px] sticky left-0 bg-muted z-20 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Domain</th>
-                            {roles.map((role) => (
-                                <th key={role} className="p-4 font-bold border-b-2 border-r border-border min-w-[180px] last:border-r-0">
-                                    {role}
-                                </th>
-                            ))}
+                            <th className="p-4 font-bold border-b-2 border-r border-border w-[240px] sticky left-0 bg-muted/95 backdrop-blur-sm z-20 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">
+                                <span className="flex items-center gap-2">
+                                    <Award className="w-4 h-4" />
+                                    Domain
+                                </span>
+                            </th>
+                            {roles.map((role, index) => {
+                                const RoleIcon = roleIcons[role] || User;
+                                return (
+                                    <th key={role} className="p-4 font-bold border-b-2 border-r border-border min-w-[200px] last:border-r-0 relative">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <RoleIcon className="w-4 h-4 opacity-70" />
+                                            {role}
+                                        </div>
+                                        {/* Progression Arrow */}
+                                        {index < roles.length - 1 && (
+                                            <div className="absolute top-1/2 -right-3 transform -translate-y-1/2 z-10 text-muted-foreground/20">
+                                                <ChevronRight className="w-6 h-6" />
+                                            </div>
+                                        )}
+                                    </th>
+                                );
+                            })}
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
-                        {sdlcData.map((domain) => (
-                            <React.Fragment key={domain.name}>
-                                {/* Main Domain Row */}
-                                <tr className="group bg-card hover:bg-muted/5 transition-colors">
-                                    <td className="p-4 font-semibold border-r-2 border-b border-border bg-card sticky left-0 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] group-hover:bg-muted/5 transition-colors">
-                                        <div>
-                                            {domain.name}
-                                            <p className="text-xs text-muted-foreground font-normal mt-1 line-clamp-2">
-                                                {domain.description}
-                                            </p>
-                                        </div>
-                                    </td>
-                                    {roles.map((role) => {
-                                        const levelData = domain.levels[role];
-                                        return (
-                                            <td
-                                                key={role}
-                                                className="p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell"
-                                                onClick={() => setSelectedCell({ role, domain: domain.name, data: levelData })}
-                                            >
-                                                <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
-                                                {levelData.summary}
-                                                <div className="mt-2 text-xs font-medium text-primary opacity-0 group-hover/cell:opacity-100 transition-opacity">
-                                                    Click to view details →
-                                                </div>
-                                            </td>
-                                        );
-                                    })}
-                                </tr>
+                        {sdlcData.map((domain) => {
+                            const config = domainConfig[domain.name] || { icon: FileText, color: "text-gray-500" };
+                            const DomainIcon = config.icon;
 
-                                {/* Sub-rows for System/component design */}
-                                {domain.name === "System/component design" && (
-                                    <>
-                                        {["Security", "Stability & Performance", "Observability"].map((subSectionTitle) => (
-                                            <tr key={subSectionTitle} className="group bg-muted/5 hover:bg-muted/10 transition-colors">
-                                                <td className="p-4 pl-8 font-medium text-muted-foreground border-r-2 border-b border-border bg-muted/10 sticky left-0 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] group-hover:bg-muted/20 transition-colors border-l-4 border-l-primary/20">
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
-                                                        {subSectionTitle}
+                            return (
+                                <React.Fragment key={domain.name}>
+                                    {/* Main Domain Row */}
+                                    <tr className="group bg-card hover:bg-muted/5 transition-colors">
+                                        <td className="p-4 font-semibold border-r-2 border-b border-border bg-card sticky left-0 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] group-hover:bg-muted/5 transition-colors">
+                                            <div className="flex items-start gap-3">
+                                                <div className={`mt - 1 p - 1.5 rounded - md bg - muted / 50 ${config.color} `}>
+                                                    <DomainIcon className="w-5 h-5" />
+                                                </div>
+                                                <div>
+                                                    <div className="text-foreground">{domain.name}</div>
+                                                    <p className="text-xs text-muted-foreground font-normal mt-1 line-clamp-2 leading-snug">
+                                                        {domain.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        {roles.map((role) => {
+                                            const levelData = domain.levels[role];
+                                            return (
+                                                <td
+                                                    key={role}
+                                                    className="p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell"
+                                                    onClick={() => setSelectedCell({ role, domain: domain.name, data: levelData })}
+                                                >
+                                                    <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
+                                                    <div className="relative z-10">
+                                                        {levelData.summary}
+                                                    </div>
+                                                    <div className="mt-3 flex items-center text-xs font-medium text-primary opacity-0 group-hover/cell:opacity-100 transition-opacity">
+                                                        <span>View Details</span>
+                                                        <ChevronRight className="w-3 h-3 ml-1" />
                                                     </div>
                                                 </td>
-                                                {roles.map((role) => {
-                                                    const levelData = domain.levels[role];
-                                                    const subSection = levelData.subSections?.find(s => s.title === subSectionTitle);
+                                            );
+                                        })}
+                                    </tr>
 
-                                                    if (!subSection) return <td key={role} className="p-4 border-r border-b border-border last:border-r-0 bg-muted/5" />;
+                                    {/* Sub-rows for System/component design */}
+                                    {domain.name === "System/component design" && (
+                                        <>
+                                            {["Security", "Stability & Performance", "Observability"].map((subSectionTitle, idx, arr) => {
+                                                const isLast = idx === arr.length - 1;
+                                                let SubIcon = Shield;
+                                                if (subSectionTitle.includes("Stability")) SubIcon = Activity;
+                                                if (subSectionTitle.includes("Observability")) SubIcon = Eye;
 
-                                                    return (
-                                                        <td
-                                                            key={role}
-                                                            className="p-4 align-top text-muted-foreground/80 text-xs leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell bg-muted/5"
-                                                            onClick={() => setSelectedCell({
-                                                                role,
-                                                                domain: `${domain.name} - ${subSectionTitle}`,
-                                                                data: {
-                                                                    behaviors: subSection.behaviors,
-                                                                    examples: subSection.examples
-                                                                }
-                                                            })}
-                                                        >
-                                                            <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
-                                                            <ul className="list-disc list-inside space-y-1">
-                                                                {subSection.behaviors.slice(0, 2).map((b, i) => (
-                                                                    <li key={i} className="line-clamp-2">{b}</li>
-                                                                ))}
-                                                            </ul>
-                                                            {subSection.behaviors.length > 2 && (
-                                                                <div className="mt-1 text-[10px] text-muted-foreground italic">
-                                                                    +{subSection.behaviors.length - 2} more...
+                                                return (
+                                                    <tr key={subSectionTitle} className="group bg-muted/5 hover:bg-muted/10 transition-colors">
+                                                        <td className="p-0 border-r-2 border-b border-border bg-muted/5 sticky left-0 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] group-hover:bg-muted/20 transition-colors">
+                                                            <div className="flex h-full">
+                                                                {/* Tree Structure Visuals */}
+                                                                <div className="w-8 flex-shrink-0 flex flex-col items-center">
+                                                                    <div className="w-px h-full bg-border/50 relative">
+                                                                        <div className="absolute top-1/2 left-0 w-4 h-px bg-border/50" />
+                                                                    </div>
                                                                 </div>
-                                                            )}
+                                                                <div className="flex-1 p-4 pl-0 flex items-center gap-2">
+                                                                    <div className="p-1 rounded bg-background border border-border/50 shadow-sm">
+                                                                        <SubIcon className="w-3.5 h-3.5 text-muted-foreground" />
+                                                                    </div>
+                                                                    <span className="text-sm font-medium text-muted-foreground">
+                                                                        {subSectionTitle}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </td>
-                                                    );
-                                                })}
-                                            </tr>
-                                        ))}
-                                    </>
-                                )}
-                            </React.Fragment>
-                        ))}
+                                                        {roles.map((role) => {
+                                                            const levelData = domain.levels[role];
+                                                            const subSection = levelData.subSections?.find(s => s.title === subSectionTitle);
+
+                                                            if (!subSection) return <td key={role} className="p-4 border-r border-b border-border last:border-r-0 bg-muted/5" />;
+
+                                                            return (
+                                                                <td
+                                                                    key={role}
+                                                                    className="p-4 align-top text-muted-foreground/80 text-xs leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell bg-muted/5"
+                                                                    onClick={() => setSelectedCell({
+                                                                        role,
+                                                                        domain: `${domain.name} - ${subSectionTitle} `,
+                                                                        data: {
+                                                                            behaviors: subSection.behaviors,
+                                                                            examples: subSection.examples
+                                                                        }
+                                                                    })}
+                                                                >
+                                                                    <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
+                                                                    <ul className="list-disc list-inside space-y-1 relative z-10">
+                                                                        {subSection.behaviors.slice(0, 2).map((b, i) => (
+                                                                            <li key={i} className="line-clamp-2">{b}</li>
+                                                                        ))}
+                                                                    </ul>
+                                                                    {subSection.behaviors.length > 2 && (
+                                                                        <div className="mt-1 text-[10px] text-muted-foreground italic relative z-10">
+                                                                            +{subSection.behaviors.length - 2} more...
+                                                                        </div>
+                                                                    )}
+                                                                </td>
+                                                            );
+                                                        })}
+                                                    </tr>
+                                                );
+                                            })}
+                                        </>
+                                    )}
+                                </React.Fragment>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>
+
 
             <div className="mt-8 text-center text-sm text-muted-foreground">
                 <p>
