@@ -1,7 +1,8 @@
 
 import Link from "next/link";
+import { Compass } from "lucide-react";
 import { CareerPathVisualizer } from "@/components/CareerPathVisualizer";
-// I'll just use a span for now.
+import { Button } from "@/components/ui/button";
 
 export default function CareerFrameworkPage() {
     return (
@@ -11,6 +12,19 @@ export default function CareerFrameworkPage() {
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                     Explore the expectations, competencies, and growth paths for Software Engineering roles.
                 </p>
+
+                {/* Navigator Link */}
+                <div className="pt-4">
+                    <Button asChild variant="outline" size="lg">
+                        <Link href="/career-framework/navigator">
+                            <Compass className="mr-2 h-4 w-4" />
+                            Framework Navigator
+                        </Link>
+                    </Button>
+                    <p className="text-xs text-muted-foreground mt-2">
+                        New to the framework? Start here for guided navigation
+                    </p>
+                </div>
             </div>
 
             <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 p-4">
