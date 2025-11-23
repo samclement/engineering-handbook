@@ -8,7 +8,7 @@ import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RoleComparatorProps {
-    roles: Awaited<ReturnType<typeof getCareerFrameworkData>>;
+    roles: ReturnType<typeof getCareerFrameworkData>;
 }
 
 export function RoleComparator({ roles }: RoleComparatorProps) {

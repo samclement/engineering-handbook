@@ -3,7 +3,7 @@ import { getCareerFrameworkData } from '@/lib/career-data';
 
 export async function GET() {
     try {
-        const roles = await getCareerFrameworkData();
+        const roles = getCareerFrameworkData();
         return NextResponse.json(roles);
     } catch (error) {
         console.error('Error fetching career framework data:', error);
