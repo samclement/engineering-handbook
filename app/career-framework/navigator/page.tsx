@@ -68,7 +68,7 @@ export default function NavigatorPage() {
                                 </li>
                             </ul>
                             <Button asChild variant="outline" className="w-full">
-                                <Link href="/role-competencies.md" target="_blank">
+                                <Link href="/career-framework/competencies">
                                     View Competencies
                                 </Link>
                             </Button>
@@ -81,7 +81,7 @@ export default function NavigatorPage() {
                             <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-3">
                                 <BarChart3 className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                             </div>
-                            <CardTitle>Dimensions</CardTitle>
+                            <CardTitle>Operating Profile</CardTitle>
                             <CardDescription>Measurement Layer</CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -104,7 +104,7 @@ export default function NavigatorPage() {
                             </ul>
                             <Button asChild className="w-full">
                                 <Link href="/career-framework/dimensions">
-                                    Explore Dimensions
+                                    Explore Operating Profile
                                 </Link>
                             </Button>
                         </CardContent>
@@ -167,7 +167,7 @@ export default function NavigatorPage() {
                                 <li>• Learn about career progression patterns</li>
                             </ul>
                             <Button asChild variant="default" className="w-full mt-4">
-                                <Link href="/role-competencies.md" target="_blank">
+                                <Link href="/career-framework/competencies">
                                     Start with Competencies
                                 </Link>
                             </Button>
@@ -182,7 +182,7 @@ export default function NavigatorPage() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-3">
-                            <p className="text-sm">Use <strong>Dimensions</strong> to:</p>
+                            <p className="text-sm">Use <strong>Operating Profile</strong> to:</p>
                             <ul className="text-sm space-y-2 ml-4">
                                 <li>• Measure where you are on each axis</li>
                                 <li>• Identify specific gaps to close</li>
@@ -190,7 +190,7 @@ export default function NavigatorPage() {
                             </ul>
                             <Button asChild variant="default" className="w-full mt-4">
                                 <Link href="/career-framework/dimensions">
-                                    Explore Dimensions
+                                    Explore Operating Profile
                                 </Link>
                             </Button>
                         </CardContent>
@@ -345,7 +345,7 @@ export default function NavigatorPage() {
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="text-primary font-bold">•</span>
-                            <span><strong>Dimensions are your measurement tool:</strong> The 5 dimensions provide objective levels (1-7) that help you track progress</span>
+                            <span><strong>Operating Profile is your measurement tool:</strong> The 5 profile dimensions provide objective levels (1-7) that help you track progress</span>
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="text-primary font-bold">•</span>

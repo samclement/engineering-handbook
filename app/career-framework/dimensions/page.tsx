@@ -33,9 +33,9 @@ export default function DimensionsPage() {
     const tabs = [
         {
             id: "dimensions" as TabType,
-            label: "Understanding Dimensions",
+            label: "Understanding Your Operating Profile",
             icon: BarChart3,
-            description: "Learn about the 5 key dimensions that differentiate roles",
+            description: "Learn about the 5 key profile dimensions that differentiate roles",
         },
         {
             id: "compare" as TabType,
@@ -64,11 +64,39 @@ export default function DimensionsPage() {
 
                 <div className="text-center space-y-4 mb-12">
                     <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
-                        Role Dimensions & Examples
+                        Role Operating Profile & Examples
                     </h1>
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Understand how roles differ across key dimensions and see concrete examples of work at each level
+                        Understand how roles differ across key profile dimensions and see concrete examples of work at each level
                     </p>
+                </div>
+
+                {/* Measurement Layer Context */}
+                <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-xl border-2 border-primary/20">
+                    <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                            <BarChart3 className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-bold mb-2">The Measurement Layer</h2>
+                            <p className="text-muted-foreground mb-3">
+                                These 5 dimensions provide an <strong>objective framework</strong> for understanding
+                                role progression. Each role maps to specific levels (1-7) across all dimensions,
+                                making growth measurable and career advancement clear.
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                                    Objective
+                                </span>
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                                    Measurable
+                                </span>
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                                    Cross-Role
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -108,7 +136,7 @@ export default function DimensionsPage() {
             {/* Footer Note */}
             <div className="mt-16 text-center text-sm text-muted-foreground">
                 <p>
-                    Dimensions are based on the{" "}
+                    Profile dimensions are based on the{" "}
                     <Link href="/career-framework" className="underline hover:text-primary">
                         Software Engineering Career Framework
                     </Link>
