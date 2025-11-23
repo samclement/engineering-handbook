@@ -18,8 +18,8 @@ export type SDLCDomain = {
 };
 
 export const roles = [
-    "Graduate",
-    "Associate",
+    "Graduate/Associate",
+    "Engineer",
     "Senior Engineer",
     "Staff",
     "Engineering Manager"
@@ -30,7 +30,7 @@ export const sdlcData: SDLCDomain[] = [
         name: "System/component design",
         description: "The ability to design software systems, from small components to large-scale distributed architectures.",
         levels: {
-            "Graduate": {
+            "Graduate/Associate": {
                 summary: "Assists with design of minor features/fixes. Understands basic patterns.",
                 behaviors: [
                     "Implements designs provided by more senior engineers.",
@@ -78,7 +78,7 @@ export const sdlcData: SDLCDomain[] = [
                     }
                 ]
             },
-            "Associate": {
+            "Engineer": {
                 summary: "Designs small components/features with guidance. Follows established patterns.",
                 behaviors: [
                     "Writes mini-design docs or notes for their features.",
@@ -276,7 +276,7 @@ export const sdlcData: SDLCDomain[] = [
         name: "Eng practices",
         description: "Habits and practices that ensure code quality, maintainability, and team collaboration.",
         levels: {
-            "Graduate": {
+            "Graduate/Associate": {
                 summary: "Participates in code reviews. Learns team standards and workflows.",
                 behaviors: [
                     "Follows the team's style guide and linting rules.",
@@ -289,7 +289,7 @@ export const sdlcData: SDLCDomain[] = [
                     "Added comments explaining 'why' not just 'what' for complex logic."
                 ]
             },
-            "Associate": {
+            "Engineer": {
                 summary: "Conducts code reviews. Pairs effectively. Follows coding standards.",
                 behaviors: [
                     "Reviews peers' code for basic correctness and style.",
@@ -347,7 +347,7 @@ export const sdlcData: SDLCDomain[] = [
         name: "Testing & QA",
         description: "Ensuring software correctness, reliability, and quality through automated and manual testing.",
         levels: {
-            "Graduate": {
+            "Graduate/Associate": {
                 summary: "Writes unit tests for own code. Executes manual test plans.",
                 behaviors: [
                     "Adds unit tests for new functions.",
@@ -360,7 +360,7 @@ export const sdlcData: SDLCDomain[] = [
                     "Fixed a flaky test that was failing in their PR."
                 ]
             },
-            "Associate": {
+            "Engineer": {
                 summary: "Writes unit/integration tests. Understands test automation basics.",
                 behaviors: [
                     "Writes integration tests for API endpoints.",
@@ -418,7 +418,7 @@ export const sdlcData: SDLCDomain[] = [
         name: "Build & Deploy",
         description: "The tools and processes used to build, test, and deploy software to production.",
         levels: {
-            "Graduate": {
+            "Graduate/Associate": {
                 summary: "Uses CI/CD pipelines. Deploys minor changes with supervision.",
                 behaviors: [
                     "Understands the stages of the deployment pipeline.",
@@ -431,7 +431,7 @@ export const sdlcData: SDLCDomain[] = [
                     "Checked the staging environment after deployment to verify the fix."
                 ]
             },
-            "Associate": {
+            "Engineer": {
                 summary: "Troubleshoots basic build issues. Deploys features independently.",
                 behaviors: [
                     "Fixes broken CI builds (e.g., dependency issues).",
@@ -489,7 +489,7 @@ export const sdlcData: SDLCDomain[] = [
         name: "Support & Operations",
         description: "Running software in production, handling incidents, and supporting users.",
         levels: {
-            "Graduate": {
+            "Graduate/Associate": {
                 summary: "Assists in debugging production issues. Updates runbooks.",
                 behaviors: [
                     "Helps reproduce bugs reported by support.",
@@ -502,7 +502,7 @@ export const sdlcData: SDLCDomain[] = [
                     "Sat in on a post-mortem meeting to understand what went wrong."
                 ]
             },
-            "Associate": {
+            "Engineer": {
                 summary: "Shadows on-call. Resolves known issues. Improves documentation.",
                 behaviors: [
                     "Participates in on-call rotation (shadow or secondary).",
