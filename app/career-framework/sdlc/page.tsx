@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { sdlcData, roles, SDLCLevel } from "@/lib/sdlc-data";
-import { SDLCDetailModal } from "@/components/SDLCDetailModal";
+import { CompetencyDetailModal } from "@/components/CompetencyDetailModal";
 
 // Map domains to icons and colors
 const domainConfig: Record<string, { icon: React.ElementType, color: string }> = {
@@ -231,7 +231,7 @@ export default function SDLCPage() {
                 </p>
             </div>
 
-            <SDLCDetailModal
+            <CompetencyDetailModal
                 isOpen={!!selectedCell}
                 onClose={() => setSelectedCell(null)}
                 role={selectedCell?.role || ""}
