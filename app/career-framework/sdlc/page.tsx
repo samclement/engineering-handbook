@@ -80,6 +80,17 @@ export default function SDLCPage() {
             <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm">
                 <table className="w-full text-sm text-left border-collapse min-w-[1200px]">
                     <thead className="bg-muted/30 text-muted-foreground">
+                        {/* Track Labels Row */}
+                        <tr className="text-xs uppercase tracking-wider">
+                            <th className="sticky left-0 bg-muted/95 backdrop-blur-sm z-20"></th>
+                            <th colSpan={4} className="text-center py-2 font-semibold bg-blue-50/50 dark:bg-blue-950/30 border-b border-blue-200/50 dark:border-blue-800/50">
+                                <span className="text-blue-700 dark:text-blue-300">Individual Contributor Track</span>
+                            </th>
+                            <th className="text-center py-2 font-semibold bg-purple-50/50 dark:bg-purple-950/30 border-b border-purple-200/50 dark:border-purple-800/50">
+                                <span className="text-purple-700 dark:text-purple-300">Management Track</span>
+                            </th>
+                        </tr>
+                        {/* Role Headers Row */}
                         <tr>
                             <th className="p-4 font-bold border-b-2 border-r border-border w-[240px] sticky left-0 bg-muted/95 backdrop-blur-sm z-20 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">
                                 <span className="flex items-center gap-2">
@@ -89,8 +100,12 @@ export default function SDLCPage() {
                             </th>
                             {roles.map((role, index) => {
                                 const RoleIcon = roleIcons[role] || User;
+                                const isManager = role === "Engineering Manager";
                                 return (
-                                    <th key={role} className="p-4 font-bold border-b-2 border-r border-border min-w-[200px] last:border-r-0 relative">
+                                    <th key={role} className={`p-4 font-bold border-b-2 border-r border-border min-w-[200px] last:border-r-0 relative ${isManager
+                                        ? 'bg-purple-50/30 dark:bg-purple-950/20'
+                                        : 'bg-blue-50/30 dark:bg-blue-950/20'
+                                        }`}>
                                         <div className="flex items-center gap-2 mb-1">
                                             <RoleIcon className="w-4 h-4 opacity-70" />
                                             {role}
@@ -130,10 +145,17 @@ export default function SDLCPage() {
                                         </td>
                                         {roles.map((role) => {
                                             const levelData = domain.levels[role];
+                                            const isManager = role === "Engineering Manager";
+                                            if (!levelData) return <td key={role} className={`p-4 border-r border-b border-border last:border-r-0 text-muted-foreground italic ${isManager ? 'bg-purple-50/20 dark:bg-purple-950/10' : 'bg-blue-50/20 dark:bg-blue-950/10'
+                                                }`}>—</td>;
+
                                             return (
                                                 <td
                                                     key={role}
-                                                    className="p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell"
+                                                    className={`p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:text-foreground transition-all relative group/cell ${isManager
+                                                        ? 'bg-purple-50/20 dark:bg-purple-950/10 hover:bg-purple-100/50 dark:hover:bg-purple-900/30'
+                                                        : 'bg-blue-50/20 dark:bg-blue-950/10 hover:bg-blue-100/50 dark:hover:bg-blue-900/30'
+                                                        }`}
                                                     onClick={() => setSelectedCell({ role, domain: domain.name, data: levelData })}
                                                 >
                                                     <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
@@ -179,35 +201,38 @@ export default function SDLCPage() {
                                                             </div>
                                                         </td>
                                                         {roles.map((role) => {
-                                                            const levelData = domain.levels[role];
-                                                            const subSection = levelData.subSections?.find(s => s.title === subSectionTitle);
-
-                                                            if (!subSection) return <td key={role} className="p-4 border-r border-b border-border last:border-r-0 bg-muted/5" />;
+                                                            const subData = domain.levels[role]?.subSections?.find(s => s.title === subSectionTitle);
+                                                            const isManager = role === "Engineering Manager";
+                                                            if (!subData) return <td key={role} className={`p-3 border-r border-b border-border last:border-r-0 text-muted-foreground italic text-xs ${isManager ? 'bg-purple-50/20 dark:bg-purple-950/10' : 'bg-blue-50/20 dark:bg-blue-950/10'
+                                                                }`}>—</td>;
 
                                                             return (
                                                                 <td
                                                                     key={role}
-                                                                    className="p-4 align-top text-muted-foreground/80 text-xs leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-blue-50/50 dark:hover:bg-blue-900/20 hover:text-foreground transition-all relative group/cell bg-muted/5"
+                                                                    className={`p-3 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 text-xs cursor-pointer hover:text-foreground transition-all relative group/cell ${isManager
+                                                                        ? 'bg-purple-50/20 dark:bg-purple-950/10 hover:bg-purple-100/50 dark:hover:bg-purple-900/30'
+                                                                        : 'bg-blue-50/20 dark:bg-blue-950/10 hover:bg-blue-100/50 dark:hover:bg-blue-900/30'
+                                                                        }`}
                                                                     onClick={() => setSelectedCell({
                                                                         role,
-                                                                        domain: `${domain.name} - ${subSectionTitle} `,
-                                                                        data: {
-                                                                            behaviors: subSection.behaviors,
-                                                                            examples: subSection.examples
-                                                                        }
+                                                                        domain: `${domain.name} - ${subSectionTitle}`,
+                                                                        data: subData
                                                                     })}
                                                                 >
                                                                     <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-primary/20 pointer-events-none transition-colors" />
-                                                                    <ul className="list-disc list-inside space-y-1 relative z-10">
-                                                                        {subSection.behaviors.slice(0, 2).map((b, i) => (
-                                                                            <li key={i} className="line-clamp-2">{b}</li>
-                                                                        ))}
-                                                                    </ul>
-                                                                    {subSection.behaviors.length > 2 && (
-                                                                        <div className="mt-1 text-[10px] text-muted-foreground italic relative z-10">
-                                                                            +{subSection.behaviors.length - 2} more...
-                                                                        </div>
-                                                                    )}
+                                                                    <div className="relative z-10">
+                                                                        <div className="font-semibold mb-1 text-foreground/70">{subSectionTitle}</div>
+                                                                        <ul className="list-disc list-inside space-y-1 text-muted-foreground/80">
+                                                                            {subData.behaviors.slice(0, 2).map((b, i) => (
+                                                                                <li key={i} className="line-clamp-2">{b}</li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    </div>
+                                                                    {/* Click indicator */}
+                                                                    <div className="absolute bottom-2 right-2 opacity-0 group-hover/cell:opacity-100 transition-opacity flex items-center gap-1 text-xs text-primary">
+                                                                        <span>View Details</span>
+                                                                        <ChevronRight className="w-3 h-3" />
+                                                                    </div>
                                                                 </td>
                                                             );
                                                         })}

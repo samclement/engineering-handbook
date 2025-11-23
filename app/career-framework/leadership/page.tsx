@@ -81,6 +81,17 @@ export default function LeadershipPage() {
             <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm">
                 <table className="w-full text-sm text-left border-collapse min-w-[1200px]">
                     <thead className="bg-muted/30 text-muted-foreground">
+                        {/* Track Labels Row */}
+                        <tr className="text-xs uppercase tracking-wider">
+                            <th className="sticky left-0 bg-muted/95 backdrop-blur-sm z-20"></th>
+                            <th colSpan={2} className="text-center py-2 font-semibold bg-blue-50/50 dark:bg-blue-950/30 border-b border-blue-200/50 dark:border-blue-800/50">
+                                <span className="text-blue-700 dark:text-blue-300">Individual Contributor Track</span>
+                            </th>
+                            <th colSpan={3} className="text-center py-2 font-semibold bg-purple-50/50 dark:bg-purple-950/30 border-b border-purple-200/50 dark:border-purple-800/50">
+                                <span className="text-purple-700 dark:text-purple-300">Management Track</span>
+                            </th>
+                        </tr>
+                        {/* Role Headers Row */}
                         <tr>
                             <th className="p-4 font-bold border-b-2 border-r border-border w-[240px] sticky left-0 bg-muted/95 backdrop-blur-sm z-20 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">
                                 <span className="flex items-center gap-2">
@@ -90,8 +101,12 @@ export default function LeadershipPage() {
                             </th>
                             {roles.map((role, index) => {
                                 const RoleIcon = roleIcons[role] || Briefcase;
+                                const isManager = role.includes("Manager") || role.includes("Head");
                                 return (
-                                    <th key={role} className="p-4 font-bold border-b-2 border-r border-border min-w-[200px] last:border-r-0 relative">
+                                    <th key={role} className={`p-4 font-bold border-b-2 border-r border-border min-w-[200px] last:border-r-0 relative ${isManager
+                                            ? 'bg-purple-50/30 dark:bg-purple-950/20'
+                                            : 'bg-blue-50/30 dark:bg-blue-950/20'
+                                        }`}>
                                         <div className="flex items-center gap-2 mb-1">
                                             <RoleIcon className="w-4 h-4 opacity-70" />
                                             {role}
@@ -129,13 +144,18 @@ export default function LeadershipPage() {
                                     </td>
                                     {roles.map((role) => {
                                         const levelData = domain.levels[role];
+                                        const isManager = role.includes("Manager") || role.includes("Head");
                                         return (
                                             <td
                                                 key={role}
-                                                className="p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:bg-purple-50/50 dark:hover:bg-purple-900/20 hover:text-foreground transition-all relative group/cell"
+                                                className={`p-4 align-top text-muted-foreground leading-relaxed border-r border-b border-border last:border-r-0 cursor-pointer hover:text-foreground transition-all relative group/cell ${isManager
+                                                        ? 'bg-purple-50/20 dark:bg-purple-950/10 hover:bg-purple-100/50 dark:hover:bg-purple-900/30'
+                                                        : 'bg-blue-50/20 dark:bg-blue-950/10 hover:bg-blue-100/50 dark:hover:bg-blue-900/30'
+                                                    }`}
                                                 onClick={() => setSelectedCell({ role, domain: domain.name, data: levelData })}
                                             >
-                                                <div className="absolute inset-0 border-2 border-transparent group-hover/cell:border-purple-500/20 pointer-events-none transition-colors" />
+                                                <div className={`absolute inset-0 border-2 border-transparent group-hover/cell:border-opacity-20 pointer-events-none transition-colors ${isManager ? 'group-hover/cell:border-purple-500/20' : 'group-hover/cell:border-blue-500/20'
+                                                    }`} />
                                                 <div className="relative z-10">
                                                     {levelData.summary}
                                                 </div>
