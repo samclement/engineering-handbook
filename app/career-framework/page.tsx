@@ -26,7 +26,8 @@ export default function CareerFrameworkPage() {
                 <h1 className="text-3xl font-bold tracking-tight lg:text-4xl">Career Framework</h1>
 
                 <p className="text-xl max-w-3xl text-muted-foreground leading-relaxed mx-auto text-center">
-                    <strong className="text-foreground">Roles</strong> define your path. <strong className="text-foreground">Operating Profiles</strong> measure your growth. Both are built on a foundation of clear <strong className="text-foreground">Reference</strong> expectations.
+                    <strong className="text-foreground">Roles</strong> describe how you progress towards leadership on either the individual contributor (IC) or management track.
+                    Both paths are built on a foundation of clear <strong className="text-foreground">technical</strong> and <strong className="text-foreground">leadership</strong> expectations.
                 </p>
             </div>
 
@@ -44,7 +45,7 @@ export default function CareerFrameworkPage() {
                         <div className="w-full border-t border-slate-200 dark:border-slate-800"></div>
                     </div>
                     <div className="relative bg-background px-4 text-sm text-muted-foreground font-medium uppercase tracking-wider">
-                        Built on a Foundation of Evidence
+                        Built on a Foundation of Skills & Capabilities
                     </div>
                 </div>
 

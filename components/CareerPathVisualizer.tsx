@@ -156,7 +156,7 @@ export function CareerPathVisualizer() {
                 {/* SDLC Focus Label */}
                 <div className="absolute top-[60%] right-[20%] hidden lg:block text-left max-w-[150px] pointer-events-none">
                     <div className="text-blue-500/30 font-bold text-3xl tracking-widest uppercase">Individual Contributor</div>
-                    <h4 className="text-sm font-bold text-slate-600">SDLC Focus</h4>
+                    <h4 className="text-sm font-bold text-slate-600">Software Development Lifecycle Focus (SDLC)</h4>
                     <p className="text-xs text-muted-foreground">Execution, Craft, Delivery</p>
                 </div>
 
