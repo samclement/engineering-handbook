@@ -4,6 +4,7 @@ import { LayerCard } from "@/components/LayerCard";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CareerPathVisualizer } from "@/components/CareerPathVisualizer";
 
 const roles = [
     { slug: "graduate-software-engineer-gse", title: "Graduate Software Engineer", track: "Foundation", abbr: "GSE" },
@@ -32,89 +33,9 @@ export default function CareerFrameworkPage() {
             {/* Main Layout - 2 Tiers */}
             <div className="mb-24 space-y-8">
 
-                {/* TIER 1: PRIMARY (Roles & Operating Profile) */}
-                <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-                    {/* Roles & Career Paths */}
-                    <Link href="/career-framework/roles" className="group block h-full relative">
-                        <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-2 border-blue-100 dark:border-blue-900/50 bg-gradient-to-b from-white to-blue-50/30 dark:from-slate-950 dark:to-blue-950/10">
-                            <CardHeader>
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                                        <GitGraph className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                                    </div>
-                                    <span className="inline-flex items-center rounded-full border border-blue-200 dark:border-blue-800 px-2.5 py-0.5 text-xs font-semibold transition-colors bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300">
-                                        Expectations
-                                    </span>
-                                </div>
-                                <CardTitle className="text-2xl group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
-                                    Roles & Career Paths
-                                </CardTitle>
-                                <CardDescription className="text-base">
-                                    Define the path: Explore role summaries, core competencies, and progression patterns.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ul className="text-sm space-y-3 mb-8">
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                                        <span>Role summaries and primary focus</span>
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                                        <span>Core competencies by category</span>
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                                        <span>Career progression patterns</span>
-                                    </li>
-                                </ul>
-                                <div className={cn(buttonVariants({ variant: "default" }), "w-full bg-blue-600 hover:bg-blue-700 text-white")}>
-                                    View Roles
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </Link>
-
-                    {/* Operating Profile */}
-                    <Link href="/career-framework/dimensions" className="group block h-full relative">
-                        <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-2 border-emerald-100 dark:border-emerald-900/50 bg-gradient-to-b from-white to-emerald-50/30 dark:from-slate-950 dark:to-emerald-950/10">
-                            <CardHeader>
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors">
-                                        <BarChart3 className="w-7 h-7 text-emerald-600 dark:text-emerald-400" />
-                                    </div>
-                                    <span className="inline-flex items-center rounded-full border border-emerald-200 dark:border-emerald-800 px-2.5 py-0.5 text-xs font-semibold transition-colors bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
-                                        Measurement
-                                    </span>
-                                </div>
-                                <CardTitle className="text-2xl group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-2">
-                                    Operating Profile
-                                </CardTitle>
-                                <CardDescription className="text-base">
-                                    Measure progress: Assess your level across 5 key dimensions with objective criteria.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ul className="text-sm space-y-3 mb-8">
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                                        <span>Quantified levels (1-7) per dimension</span>
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                                        <span>Cross-role progression visibility</span>
-                                    </li>
-                                    <li className="flex items-start gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                                        <span>Identify specific growth areas</span>
-                                    </li>
-                                </ul>
-                                <div className={cn(buttonVariants({ variant: "default" }), "w-full bg-emerald-600 hover:bg-emerald-700 text-white")}>
-                                    Explore Operating Profile
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </Link>
+                {/* TIER 1: PRIMARY (Visualizer) */}
+                <div className="mb-8">
+                    <CareerPathVisualizer />
                 </div>
 
                 {/* Connection / Divider */}
