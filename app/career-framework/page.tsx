@@ -141,10 +141,10 @@ export default function CareerFrameworkPage() {
                             </CardHeader>
                             <CardContent>
                                 <p className="text-sm text-muted-foreground mb-3">
-                                    Use <strong>Operating Profile</strong> to measure your level and identify gaps.
+                                    Use <strong>Career Progression Tool</strong> to measure your level and identify gaps.
                                 </p>
                                 <Link href="/career-framework/dimensions" className="text-sm font-medium text-purple-600 hover:underline">
-                                    Check Profile →
+                                    Check Progression →
                                 </Link>
                             </CardContent>
                         </Card>
