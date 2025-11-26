@@ -17,7 +17,7 @@ export function FitsProductSection() {
     ];
 
     return (
-        <Card className="w-full border-primary/10 shadow-sm">
+        <Card className="w-full h-full border-primary/10 shadow-xl bg-background">
             <CardHeader className="pb-4">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
