@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Layout, Users, Activity } from "lucide-react";
+import { BookOpen, Layout, Users, Activity, FileText } from "lucide-react";
 
 export function Header() {
     return (
@@ -20,8 +20,12 @@ export function Header() {
                         Career Framework
                     </Link>
                     <Link href="/artefacts" className="transition-colors hover:text-foreground/80 text-foreground/60 flex items-center gap-2">
-                        <Users className="h-4 w-4" />
+                        <FileText className="h-4 w-4" />
                         Artefacts
+                    </Link>
+                    <Link href="/team" className="transition-colors hover:text-foreground/80 text-foreground/60 flex items-center gap-2">
+                        <Users className="h-4 w-4" />
+                        Team
                     </Link>
                     <Link href="/team-health" className="transition-colors hover:text-foreground/80 text-foreground/60 flex items-center gap-2">
                         <Activity className="h-4 w-4" />
