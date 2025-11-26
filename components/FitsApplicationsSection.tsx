@@ -208,10 +208,10 @@ export function FitsApplicationsSection() {
                         key={app.name}
                         className="transition-all duration-300 hover:shadow-md border-primary/10 hover:border-primary/30"
                     >
-                        <CardHeader className="p-6 pb-4">
-                            <div className="grid grid-cols-3 gap-6">
+                        <CardHeader className="p-5">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                                 {/* Left side - App info (1 column) */}
-                                <div>
+                                <div className="flex flex-col h-full">
                                     <div className="flex items-center gap-3 mb-2">
                                         <CardTitle className="text-lg">{app.name}</CardTitle>
                                         <span
@@ -222,206 +222,134 @@ export function FitsApplicationsSection() {
                                             {app.status}
                                         </span>
                                     </div>
-                                    <CardDescription className="line-clamp-2 text-sm">{app.description}</CardDescription>
-                                    <div className="mt-2 text-xs text-muted-foreground">
-                                        {app.repos.length} {app.repos.length === 1 ? "repository" : "repositories"}
+                                    <CardDescription className="line-clamp-2 text-sm mb-3">{app.description}</CardDescription>
+
+                                    <div className="mt-auto pt-2">
+                                        <button
+                                            onClick={() => toggleApp(app.name)}
+                                            className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:underline group"
+                                        >
+                                            <GitBranch className="h-3.5 w-3.5" />
+                                            {app.repos.length} {app.repos.length === 1 ? "repository" : "repositories"}
+                                            <ChevronDown
+                                                className={`h-3 w-3 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                                            />
+                                        </button>
                                     </div>
                                 </div>
 
                                 {/* Right side - Observability, Environments, Info (2 columns) */}
-                                <div className="col-span-2 grid gap-4 grid-cols-3">
+                                <div className="lg:col-span-2 flex flex-col justify-center gap-3">
                                     {/* Observability */}
-                                    <div className="space-y-2">
-                                        <h4 className="text-sm font-medium flex items-center gap-2 text-primary">
-                                            <Monitor className="h-4 w-4" /> Observability
-                                        </h4>
-                                        <ul className="text-sm space-y-1 text-muted-foreground">
-                                            {app.observability.apm && (
-                                                <li>
-                                                    <Link
-                                                        href={app.observability.apm}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Dynatrace APM
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.observability.logs && (
-                                                <li>
-                                                    <Link
-                                                        href={app.observability.logs}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Logs
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.observability.alerts && (
-                                                <li>
-                                                    <Link
-                                                        href={app.observability.alerts}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Alerts
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.observability.dashboard && (
-                                                <li>
-                                                    <Link
-                                                        href={app.observability.dashboard}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Cost Dashboard
-                                                    </Link>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </div>
+                                    {(app.observability.apm || app.observability.logs || app.observability.alerts || app.observability.dashboard) && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="flex items-center gap-2 min-w-[120px] text-sm font-medium text-primary">
+                                                <Monitor className="h-4 w-4" /> Observability
+                                            </div>
+                                            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                                                {app.observability.apm && (
+                                                    <Link href={app.observability.apm} className="hover:text-primary transition-colors hover:underline">Dynatrace APM</Link>
+                                                )}
+                                                {app.observability.logs && (
+                                                    <Link href={app.observability.logs} className="hover:text-primary transition-colors hover:underline">Logs</Link>
+                                                )}
+                                                {app.observability.alerts && (
+                                                    <Link href={app.observability.alerts} className="hover:text-primary transition-colors hover:underline">Alerts</Link>
+                                                )}
+                                                {app.observability.dashboard && (
+                                                    <Link href={app.observability.dashboard} className="hover:text-primary transition-colors hover:underline">Cost Dashboard</Link>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {/* Environments */}
-                                    <div className="space-y-2">
-                                        <h4 className="text-sm font-medium flex items-center gap-2 text-primary">
-                                            <Server className="h-4 w-4" /> Environments
-                                        </h4>
-                                        <ul className="text-sm space-y-1 text-muted-foreground">
-                                            {app.environments.production && (
-                                                <li>
-                                                    <Link
-                                                        href={app.environments.production}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Production (AKS)
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.environments.preProd && (
-                                                <li>
-                                                    <Link
-                                                        href={app.environments.preProd}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Pre-Prod
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.environments.sit && (
-                                                <li>
-                                                    <Link
-                                                        href={app.environments.sit}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        SIT
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.environments.dev && (
-                                                <li>
-                                                    <Link
-                                                        href={app.environments.dev}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Dev
-                                                    </Link>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </div>
+                                    {(app.environments.production || app.environments.preProd || app.environments.sit || app.environments.dev) && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="flex items-center gap-2 min-w-[120px] text-sm font-medium text-primary">
+                                                <Server className="h-4 w-4" /> Environments
+                                            </div>
+                                            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                                                {app.environments.production && (
+                                                    <Link href={app.environments.production} className="hover:text-primary transition-colors hover:underline">Production (AKS)</Link>
+                                                )}
+                                                {app.environments.preProd && (
+                                                    <Link href={app.environments.preProd} className="hover:text-primary transition-colors hover:underline">Pre-Prod</Link>
+                                                )}
+                                                {app.environments.sit && (
+                                                    <Link href={app.environments.sit} className="hover:text-primary transition-colors hover:underline">SIT</Link>
+                                                )}
+                                                {app.environments.dev && (
+                                                    <Link href={app.environments.dev} className="hover:text-primary transition-colors hover:underline">Dev</Link>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {/* Info */}
-                                    <div className="space-y-2">
-                                        <h4 className="text-sm font-medium flex items-center gap-2 text-primary">
-                                            <BookOpen className="h-4 w-4" /> Info
-                                        </h4>
-                                        <ul className="text-sm space-y-1 text-muted-foreground">
-                                            {app.info.runbooks && (
-                                                <li>
-                                                    <Link
-                                                        href={app.info.runbooks}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Runbooks & SOPs
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.info.slas && (
-                                                <li>
-                                                    <Link
-                                                        href={app.info.slas}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        SLAs
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {app.info.docs && (
-                                                <li>
-                                                    <Link
-                                                        href={app.info.docs}
-                                                        className="hover:text-primary transition-colors hover:underline"
-                                                    >
-                                                        Documentation
-                                                    </Link>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </div>
+                                    {(app.info.runbooks || app.info.slas || app.info.docs) && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="flex items-center gap-2 min-w-[120px] text-sm font-medium text-primary">
+                                                <BookOpen className="h-4 w-4" /> Info
+                                            </div>
+                                            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                                                {app.info.runbooks && (
+                                                    <Link href={app.info.runbooks} className="hover:text-primary transition-colors hover:underline">Runbooks & SOPs</Link>
+                                                )}
+                                                {app.info.slas && (
+                                                    <Link href={app.info.slas} className="hover:text-primary transition-colors hover:underline">SLAs</Link>
+                                                )}
+                                                {app.info.docs && (
+                                                    <Link href={app.info.docs} className="hover:text-primary transition-colors hover:underline">Documentation</Link>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </CardHeader>
 
-                        {/* Repositories - At bottom, collapsible */}
-                        <CardContent className="p-6 pt-0">
-                            <div>
-                                <div
-                                    className="flex items-center gap-2 cursor-pointer mb-4 group"
-                                    onClick={() => toggleApp(app.name)}
-                                >
-                                    <h4 className="text-sm font-medium flex items-center gap-2 text-primary">
-                                        <GitBranch className="h-4 w-4" /> Repositories
-                                    </h4>
-                                    <ChevronDown
-                                        className={`h-4 w-4 text-muted-foreground transition-transform duration-200 group-hover:text-primary ${isExpanded ? "rotate-180" : ""
-                                            }`}
-                                    />
-                                </div>
-                                {isExpanded && (
-                                    <div className="flex flex-wrap gap-4">
-                                        {app.repos.map((repo) => (
-                                            <div
-                                                key={repo.name}
-                                                className="flex-1 min-w-[250px] max-w-[350px] p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors border border-border/50"
-                                            >
-                                                <div className="space-y-2">
-                                                    <div className="font-medium text-sm">{repo.name}</div>
-                                                    <div className="text-xs text-muted-foreground">
-                                                        {repo.description}
-                                                    </div>
-                                                    <div className="flex gap-3 text-xs">
-                                                        {repo.links.github && (
-                                                            <Link
-                                                                href={repo.links.github}
-                                                                className="text-primary hover:underline"
-                                                            >
-                                                                GitHub
-                                                            </Link>
-                                                        )}
-                                                        {repo.links.muziris && (
-                                                            <Link
-                                                                href={repo.links.muziris}
-                                                                className="text-primary hover:underline"
-                                                            >
-                                                                Muziris
-                                                            </Link>
-                                                        )}
-                                                    </div>
+                        {/* Repositories - Collapsible Content */}
+                        {isExpanded && (
+                            <CardContent className="p-5 pt-0 border-t border-border/50 bg-secondary/5">
+                                <div className="pt-4 flex flex-wrap gap-4">
+                                    {app.repos.map((repo) => (
+                                        <div
+                                            key={repo.name}
+                                            className="flex-1 min-w-[250px] max-w-[350px] p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-border/50 shadow-sm"
+                                        >
+                                            <div className="space-y-2">
+                                                <div className="font-medium text-sm flex items-center gap-2">
+                                                    <GitBranch className="h-3.5 w-3.5 text-muted-foreground" />
+                                                    {repo.name}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground line-clamp-2">
+                                                    {repo.description}
+                                                </div>
+                                                <div className="flex gap-3 text-xs pt-1">
+                                                    {repo.links.github && (
+                                                        <Link
+                                                            href={repo.links.github}
+                                                            className="text-primary hover:underline font-medium"
+                                                        >
+                                                            GitHub
+                                                        </Link>
+                                                    )}
+                                                    {repo.links.muziris && (
+                                                        <Link
+                                                            href={repo.links.muziris}
+                                                            className="text-primary hover:underline font-medium"
+                                                        >
+                                                            Muziris
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </CardContent>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        )}
                     </Card>
                 );
             })}

@@ -37,7 +37,7 @@ export default function TeamFitsPage() {
                     {/* Right Column: Team & Delivery (1/3 width) */}
                     <div className="flex flex-col gap-6 h-full">
                         {/* Team Members */}
-                        <Card className="flex-1 transition-all duration-300 shadow-xl bg-background hover:shadow-2xl hover:-translate-y-1 border-primary/10 hover:border-primary/30">
+                        <Card className="flex-1 transition-all duration-300 shadow-md bg-background hover:shadow-xl hover:-translate-y-1 border-border/40 hover:border-primary/20">
                             <CardHeader className="pb-3">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-primary/10">
@@ -134,7 +134,7 @@ export default function TeamFitsPage() {
                         </Card>
 
                         {/* Delivery - Moved from Engineering */}
-                        <Card className="flex-1 transition-all duration-300 shadow-xl bg-background hover:shadow-2xl hover:-translate-y-1 border-primary/10 hover:border-primary/30">
+                        <Card className="flex-1 transition-all duration-300 shadow-md bg-background hover:shadow-xl hover:-translate-y-1 border-border/40 hover:border-primary/20">
                             <CardHeader className="pb-3">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-primary/10">
@@ -156,7 +156,7 @@ export default function TeamFitsPage() {
                 </div>
 
                 {/* Engineering & Ecosystem Section */}
-                <div className="-mt-20 pt-28 pb-8 px-6 md:px-8 rounded-3xl border bg-slate-50 dark:bg-slate-900/50 shadow-sm space-y-10">
+                <div className="-mt-20 pt-28 pb-8 px-6 md:px-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 shadow-sm space-y-10">
                     {/* Engineering */}
                     <section className="space-y-6">
                         <div className="flex items-center gap-3">
@@ -188,10 +188,10 @@ export default function TeamFitsPage() {
                             </Card>
 
                             {/* Support & Operations */}
-                            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-primary/10 hover:border-primary/30 bg-background/60">
+                            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-red-200/60 dark:border-red-900/60 hover:border-red-300/60 dark:hover:border-red-800/60 bg-background/60">
                                 <CardHeader>
-                                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                                        <LifeBuoy className="h-6 w-6 text-primary" />
+                                    <div className="w-12 h-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-4">
+                                        <LifeBuoy className="h-6 w-6 text-red-600/80 dark:text-red-400/80" />
                                     </div>
                                     <CardTitle>Support & Operations</CardTitle>
                                     <CardDescription>Incident management and support.</CardDescription>
