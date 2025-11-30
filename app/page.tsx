@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Layout, Users, Activity, BookOpen } from "lucide-react";
+import { ArrowRight, Layout, Users, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -38,18 +38,13 @@ export default function Home() {
             Engineering Handbook
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Your central hub for career development, role expectations, and team health monitoring.
+            Your central hub for career development and role expectations.
             Designed to empower engineers and leaders.
           </p>
           <div className="flex gap-4 justify-center pt-4">
             <Button size="lg" asChild>
               <Link href="/career-framework">
                 Explore Framework <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/team-health">
-                Check Team Health
               </Link>
             </Button>
           </div>
@@ -62,7 +57,7 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 gap-8"
         >
           <motion.div variants={item}>
             <Link href="/career-framework" className="block h-full group">
@@ -104,29 +99,6 @@ export default function Home() {
                     <li>Design Docs & RFCs</li>
                     <li>Incident Reports</li>
                     <li>Growth Plans</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </Link>
-          </motion.div>
-
-          <motion.div variants={item}>
-            <Link href="/team-health" className="block h-full group">
-              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-primary/10 hover:border-primary/30">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Activity className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>Team Health</CardTitle>
-                  <CardDescription>
-                    Metrics and reporting structures for maintaining high-performing teams.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                    <li>Weekly Team Reporting</li>
-                    <li>Monthly Business Reporting</li>
-                    <li>Quarterly Vendor Reporting</li>
                   </ul>
                 </CardContent>
               </Card>
